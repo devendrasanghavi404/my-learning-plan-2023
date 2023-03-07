@@ -1,0 +1,76 @@
+During a job interview for a Java developer role with 1 year of experience at Accenture India, the interviewer may ask a combination of technical, behavioral, and situational questions. Some sample questions could be:
+
+Technical questions:
+
+What is your experience with Java programming language?
+Can you explain the difference between an interface and an abstract class in Java?
+How do you handle error and exception handling in your Java projects?
+Can you walk me through your understanding of object-oriented programming principles?
+How have you utilized multithreading in your projects?
+Have you worked with any Java frameworks such as Spring or Hibernate?
+Behavioral questions:
+
+Can you give an example of a challenging project you worked on and how you overcame any obstacles during the project?
+Can you describe a time when you had to work with a difficult team member and how you handled the situation?
+Can you tell me about a time when you went above and beyond to ensure a project was successful?
+Situational questions:
+
+How would you approach debugging a Java application that is not functioning properly?
+Can you walk me through your process for testing and quality assurance in your Java projects?
+Can you give an example of how you have integrated a new feature into an existing Java application?
+It's important to prepare for these types of questions and to be able to articulate your experiences and thought processes in a clear and concise manner.
+
+
+
+
+Line 13:
+One of the challenging projects I worked on was for a customer who was using SAP Business Objects (BO) for reporting and had trouble scheduling his crystal reports. After conducting a thorough investigation, I found that the issue was due to incorrect firewall configurations settings and missing ODBC drivers in the SAP BO environment.
+
+To overcome this obstacle, I first collaborated with the customer to understand his specific requirements and the expected outcome for the scheduled reports. I then reviewed the SAP BO documentation and consulted with my team to determine the best solution.
+
+I implemented a custom solution that involved modifying the existing configuration settings in the SAP BO environment and writing scripts to automate the scheduling process. I also performed multiple tests to ensure that the solution would work as expected.
+
+Once the solution was deployed, I trained the customer on how to use it and provided ongoing support to ensure that the scheduling process was running smoothly. The customer was extremely satisfied with the outcome and was able to schedule his crystal reports without any issues.
+
+This project was challenging because it required a deep understanding of the SAP BO environment and scripting skills, but it was also a great opportunity for me to learn and expand my technical expertise. I am proud to have been able to successfully deliver a solution that met the customer's needs and expectations.
+---
+
+
+
+Write a Java program to find the duplicate elements in an array.
+Write a Java program to reverse a string without using the built-in reverse function.
+Write a Java program to find the second highest number in an array.
+Write a Java program to implement a linked list in Java.
+Write a Java program to implement a binary search.
+Write a Java program to implement a stack using an array.
+Write a Java program to implement a queue using a linked list.
+Write a Java program to implement a bubble sort algorithm.
+Write a Java program to implement a selection sort algorithm.
+Write a Java program to implement a merge sort algorithm.
+It's important to note that the questions might not be limited to the coding part, and there might be theoretical questions on Java concepts, such as inheritance, polymorphism, and collections. Additionally, the interviewer might also ask questions on your work experience, projects you have worked on, and your approach to solving problems.
+
+
+Here are some common Java coding questions that could be asked in an Accenture India interview for 2-4 years of experience:
+
+Explain inheritance and polymorphism in Java.
+What is the difference between method overloading and method overriding in Java?
+Can you explain the concept of immutability in Java?
+What is the use of the synchronized keyword in Java?
+Can you write a program to reverse a string in Java?
+What is the difference between an ArrayList and a LinkedList in Java?
+Can you explain the concept of exception handling in Java?
+What is the use of the volatile keyword in Java?
+Can you write a program to find the first non-repeated character in a string in Java?
+Can you explain the difference between deep and shallow copy in Java?
+
+How does the HashMap work in Java?
+Can you write a program to check if a number is a palindrome in Java?
+What is the difference between equals() and == in Java?
+Can you explain the concept of Generics in Java?
+What is the use of the finally block in Java?
+Can you write a program to sort an array of integers in Java?
+Can you explain the concept of the singleton design pattern in Java?
+What is the difference between abstract class and interface in Java?
+Can you write a program to find the common elements in two arrays in Java?
+Can you explain the use of the transient keyword in Java?
+
