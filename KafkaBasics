@@ -1,0 +1,238 @@
+Kafka Topic
+________ 
+1.Messages in kafka are categorized into topics
+2.The closest analogy for topics are database table or folder in file system.
+
+
+Partitions
+___________
+1.A topic can have multiple partions.
+2.Partion are also the way that kafka provide redundnancy and scalability
+3.Each partition can be hosted to a different server,which means that a single topic can be scaled  horizontally
+  across multiple servers to provide performance far beyond the ability of a single server.
+
+
+
+
+
+Producer
+_________
+1.Producers create new messages. 
+2.In other words it is publish/subscribe system, these may be called publishers or writers. 
+3.A message will be produced to a specific topic. By default, the producer will balance messages over all partitions of a topic evenly.
+4.In some cases,the producer will direct messages to specific partitions. This is typically done using the message key and a partitioner that will generate a hash of the key and map it to a specific partition.
+
+Note::
+This ensures that all messages produced with a given key will get written to the same partition.
+
+
+
+Kafka Consumer
+_________
+1.Consumers read messages.
+2.In other publish/subscribe systems, these clients may be called subscribers or readers. The consumer subscribes to one or more topics and reads the messages in the order in which they were produced to   each partition. 
+3.The consumer keeps track of which messages it has already consumed by keeping track of the offset of messages
+
+
+
+Offset
+________
+1.The offset—an integer value that continually increases—iscanother piece of metadata that Kafka adds to each message as it is produced. Each message in a given partition has a unique offset, and the following message has a
+greater offset (though not necessarily monotonically greater). 
+2.By storing the next possible offset for each partition, typically in Kafka itself, a consumer can stop and restart without losing its place.
+
+
+Consumer Group
+______________
+1.Consumers work as part of a consumer group, which is one or more consumers that work together to consume a topic. 
+2.The group ensures that each partition is only consumed by one member. In Figure 1-6, there are three consumers in a single group
+consuming a topic. 
+3.The mapping of a consumer to a partition is often called ownership of the partition by the consumer.
+
+
+
+Broker
+_______
+1.A single Kafka server is called a broker.
+2.The broker receives messages from producers,assigns offsets to them, and writes the messages to storage on disk. 
+3.It also services consumers, responding to fetch requests for partitions and responding with the messages that have been published.
+
+
+Kafka Cluster
+_______________
+1.Kafka brokers are designed to operate as part of a cluster.
+2.Within a cluster of brokers,one broker will also function as the cluster controller (elected automatically from thelive members of the cluster).
+3.The controller is responsible for administrative operations, including assigning partitions to brokers and monitoring for broker failures. 
+4.A partition is owned by a single broker in the cluster, and that broker is called the leader
+of the partition.
+
+
+Repilication
+______________
+1.A replicated partition  is assigned to additional brokers, called followers of the partition. 
+2.Replication provides redundancy of messages in the partition, such that one of the followers can take over leadership if thereis a broker failure
+
+
+Multiple Producers
+_____________________
+1.Kafka is able to seamlessly handle multiple producers, whether those clients are using many topics or the same topic. 
+2.This makes the system ideal for aggregating data from many frontend systems and making it consistent. 
+For example
+A site that serves content to users via a number of microservices can have a single topic for page views that all services can write to using a common format. Consumer applications can then
+receive a single stream of page views for all applications on the site without having to coordinate consuming from multiple topics, one for each application.
+
+
+
+
+Multiple Consumers
+_______________________
+In addition to multiple producers, Kafka is designed for multiple consumers to read any single stream of messages without interfering with each other client. This is in contrast to many queuing systems where once a message is consumed by one client, it is not available to any other. Multiple Kafka consumers can choose to operate as part of a group and share a stream, assuring that the entire group processes a given message only once.
+
+
+Zookeeper
+___________
+1.Apache Kafka uses Apache ZooKeeper to store metadata about the Kafka cluster.
+2.ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
+
+
+How producer send a message?
+____________________________
+1.We start producing messages to Kafka by creating a ProducerRecord, which must include the topic we want to send the record to and a value.
+2.Optionally, we can also specify a key, a partition, a timestamp, and/or a collection of headers
+3.Once we send the ProducerRecord, the first thing the producer will do is serialize the key and value objects to byte arrays so they can be sent over the network.
+4.If we didn’t explicitly specify a partition, the data is sent to a partitioner.
+5.partitioner will choose a partition for us, usually based on the ProducerRecord key.
+6.Once a partition is selected, the producer knows which topic and partition the recordwill go to. 
+7.It then adds the record to a batch of records that will also be sent to the same topic and partition.
+8. A separate thread is responsible for sending those batches of records to the appropriate Kafka brokers
+
+
+
+bootstrap.servers
+__________________
+1.List of host:port pairs of brokers that the producer will use to establish initial connection to the Kafka cluster. 
+2.This list doesn’t need to include all brokers, since the producer will get more information after the initial connection.
+3.But it is recommended to include at least two, so in case one broker goes down, the producer will still be able to connect to the cluster
+
+
+
+
+
+key.serializer
+________________
+Name of a class that will be used to serialize the keys of the records we will produce to Kafka.
+
+
+value.serializer
+________________
+Name of a class that will be used to serialize the values of the records we will produce to Kafka.
+
+
+
+Some Scenarios from consumer group and topic and partition
+__________________________________________________________
+1.Let’s take topic T1 with four partitions. Now suppose we created a new consumer, C1, which is the only consumer in group G1, and use it to subscribe to topic T1. Con‐
+sumer C1 will get all messages from all four T1 partitions.
+
+2.If we add another consumer, C2, to group G1, each consumer will only get messagesfrom two partitions. Perhaps messages from partition 0 and 2 go to C1, and messages
+from partitions 1 and 3 go to consumer C2
+
+3.If G1 has four consumers, then each will read messages from a single partition
+
+4.If we add more consumers to a single group with a single topic than we have partitions, some of the consumers will be idle and get no messages at all.
+
+5.if we add a new consumer group (G2) with a single consumer, this consumer will get all the messages in topic T1 independent of what G1 is
+doing. 
+
+
+
+
+
+
+
+
+Summary:
+    Apache Kafka is a distributed messaging system that allows multiple applications to communicate with each other.
+
+    It was developed at LinkedIn and open-sourced in 2011.
+
+    Kafka is designed to handle large amounts of data in real-time.
+
+    It is a horizontally scalable system that can handle millions of messages per second.
+
+    Kafka provides high availability and fault tolerance by replicating data across multiple nodes.
+
+    Kafka uses a publish-subscribe model, where producers write messages to topics, and consumers subscribe to those topics to receive messages.
+
+    Kafka provides a durable message store, meaning messages are stored on disk and can be replayed in case of failures.
+
+    Kafka is often used for real-time data processing, such as stream processing, event sourcing, and data pipelines.
+
+    Kafka is written in Scala and Java and supports a variety of client libraries in different programming languages.
+
+    Kafka integrates well with other big data technologies, such as Hadoop, Spark, and Flink.
+
+    Kafka provides a REST API and a command-line interface for managing topics, producers, and consumers.
+
+    Kafka supports message retention policies, allowing messages to be retained for a specified period or until a certain size is reached.
+
+    Kafka provides configurable compression algorithms to optimize message storage and transfer.
+
+    Kafka provides a feature called "exactly-once" semantics, ensuring that messages are processed only once, even in case of failures.
+
+    Kafka supports authentication and authorization mechanisms, such as SSL/TLS, SASL, and ACLs.
+
+    Kafka provides monitoring and alerting features, such as metrics collection, log aggregation, and health checks.
+
+    Kafka supports multi-datacenter deployments, allowing data to be replicated across different geographical locations.
+
+    Kafka provides a community-driven ecosystem of plugins, connectors, and tools for various use cases.
+
+    Kafka is licensed under the Apache 2.0 license, allowing it to be used freely in both commercial and non-commercial settings.
+
+    Kafka is widely adopted by organizations across different industries, such as financial services, healthcare, retail, and social media.
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
